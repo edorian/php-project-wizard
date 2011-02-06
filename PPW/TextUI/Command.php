@@ -208,45 +208,36 @@ class PPW_TextUI_Command
           date('D M j G:i:s T Y', $_SERVER['REQUEST_TIME'])
         );
 
-        $buildXml = new Text_Template($templatePath . 'build.xml');
-
-        $buildXml->setVar(
-          array(
-            'generated'    => $generated,
-            'project_name' => $name
-          )
-        );
-
+        $buildXmlTemplate = new Text_Template($templatePath . 'build.xml');
         $_target = $target . DIRECTORY_SEPARATOR . 'build.xml';
-        $buildXml->renderTo($_target);
+        
+        $buildXml = new PPW_Template_BuildXmlProcessor($buildXmlTemplate, $_target);
+        $buildXml->setGenerated($generated);
+        $buildXml->setProjectName($name);
+        $buildXml->render();
+
         print "\nWrote build script for Apache Ant to " . $_target;
 
-        $properties = new Text_Template($templatePath . 'build.properties');
-
-        $properties->setVar(
-          array(
-            'source' => $source,
-            'tests'  => $tests
-          )
-        );
-
+        $propertiesTemplate = new Text_Template($templatePath . 'build.properties');
         $_target = $target . DIRECTORY_SEPARATOR . 'build.properties';
-        $properties->renderTo($_target);
+
+        $properties = new PPW_Template_BuildPropertiesProcessor($propertiesTemplate, $_target);
+        $properties->setSourcesFolder($source);
+        $properties->setTestsFolder($tests);
+        $properties->render();
+ 
         print "\nWrote build configuration for Apache Ant to " . $_target;
 
-        $phpunit = new Text_Template($templatePath . 'phpunit.xml');
-
-        $phpunit->setVar(
-          array(
-            'generated'    => $generated,
-            'project_name' => $name,
-            'source'       => $source,
-            'bootstrap'    => $bootstrap
-          )
-        );
-
+        $phpunitTemplate = new Text_Template($templatePath . 'phpunit.xml');
         $_target = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
-        $phpunit->renderTo($_target);
+
+        $phpunitXml = new PPW_Template_PhpUnitXmlProcessor($phpunitTemplate, $_target);
+        $phpunitXml->setGenerated($generated);
+        $phpunitXml->setProjectName($name);
+        $phpunitXml->setSourcesFolder($source);
+        $phpunitXml->setBootstrapFile($bootstrap);
+
+        $phpunitXml->render();
 
         print "\nWrote configuration for PHPUnit to " . $_target . "\n";
     }
@@ -264,7 +255,8 @@ Usage: ppw [switches] <directory>
   --name <name>         Name of the project.
   --bootstrap <script>  Bootstrap script for testsuite.
   --source <directory>  Directory with the project's sources.
-  --tests <directory>   Directory with the project's tests.
+  --tests <directory>   Directory with the project's tests. 
+                        Multiple directories can be serperated by comma.
 
   --help                Prints this usage information.
   --version             Prints the version and exits.

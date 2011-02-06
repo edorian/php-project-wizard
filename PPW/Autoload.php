@@ -50,7 +50,11 @@ function ppw_autoload($class) {
 
     if ($classes === NULL) {
         $classes = array(
-          'ppw_textui_command' => '/TextUI/Command.php'
+          'ppw_textui_command' => '/TextUI/Command.php',
+          'ppw_template_templateprocessor' => '/Template/TemplateProcessor.php',
+          'ppw_template_buildxmlprocessor' => '/Template/BuildXmlProcessor.php',
+          'ppw_template_buildpropertiesprocessor' => '/Template/BuildPropertiesProcessor.php',
+          'ppw_template_phpunitxmlprocessor' => '/Template/PhpUnitXmlProcessor.php',
         );
 
         $path = dirname(__FILE__);
