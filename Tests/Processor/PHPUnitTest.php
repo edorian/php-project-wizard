@@ -61,8 +61,8 @@ class PPW_Processor_PHPUnitTest extends PHPUnit_Framework_TestCase
                  ->method('setVar')
                  ->with(
                     array('bootstrap' => 'MyBootstrap',
-                          'source'    => 'MySource',
-                          'tests'     => 'MyTests'));
+                          'source'    => "<directory suffix=\".php\">MySource</directory>\n",
+                          'test'      => "<directory suffix=\"Test.php\">MyTests</directory>\n"));
 
         $template->expects($this->at(1))
                  ->method('setVar')

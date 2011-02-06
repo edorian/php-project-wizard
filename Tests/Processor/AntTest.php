@@ -59,9 +59,10 @@ class PPW_Processor_AntTest extends PHPUnit_Framework_TestCase
 
         $template->expects($this->at(0))
                  ->method('setVar')
-                 ->with(array('source_property' => 'MySource',
-                              'phpcs_rules'     => 'MyCsRules',
-                              'phpmd_rules'     => 'MyPmdRules'));
+                 ->with(array('source_property'       => 'MySource',
+                              'source_property_comma' => 'MySource',
+                              'phpcs_rules'           => 'MyCsRules',
+                              'phpmd_rules'           => 'MyPmdRules'));
 
         $template->expects($this->at(1))
                  ->method('setVar')
