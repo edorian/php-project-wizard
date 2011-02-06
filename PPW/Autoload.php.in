@@ -44,9 +44,10 @@
 require_once 'Text/Template/Autoload.php';
 require_once 'ezc/Base/base.php';
 
-function ppw_autoload($class) {
+function ppw_autoload($class)
+{
     static $classes = NULL;
-    static $path = NULL;
+    static $path    = NULL;
 
     if ($classes === NULL) {
         $classes = array(
