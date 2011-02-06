@@ -24,13 +24,13 @@ class PPW_Processor_PHPUnitTest extends PHPUnit_Framework_TestCase {
         $template->expects($this->once())
                  ->method("renderTo")
                  ->with("OutputPath");
-        $buildXmlProcessor = new PPW_Processor_PHPUnit($template, "OutputPath");
-        $buildXmlProcessor->setGenerated("123");
-        $buildXmlProcessor->setProjectName("MyProject");
-        $buildXmlProcessor->setSourcesFolder("MySource");
-        $buildXmlProcessor->setTestsFolder("MyTests");
-        $buildXmlProcessor->setBootstrapFile("MyBootstrap");
-        $buildXmlProcessor->render();
+        $phpunitProcessor = new PPW_Processor_PHPUnit($template, "OutputPath");
+        $phpunitProcessor->setGenerated("123");
+        $phpunitProcessor->setProjectName("MyProject");
+        $phpunitProcessor->setSourcesFolder("MySource");
+        $phpunitProcessor->setTestsFolder("MyTests");
+        $phpunitProcessor->setBootstrapFile("MyBootstrap");
+        $phpunitProcessor->render();
     }
 
 }
