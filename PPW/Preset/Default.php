@@ -53,6 +53,9 @@
  */
 class PPW_Preset_Default extends PPW_Preset
 {
+    /**
+     * @return array
+     */
     public function getConfiguration()
     {
         $templatePath = dirname(__FILE__) . DIRECTORY_SEPARATOR .
