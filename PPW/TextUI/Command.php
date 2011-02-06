@@ -268,17 +268,21 @@ class PPW_TextUI_Command
         print <<<EOT
 Usage: ppw [switches] <directory>
 
-  --name <name>         Name of the project.
-  --source <directory>  Directory with the project's sources.
-  --tests <directory>   Directory with the project's tests.
+  Mandatory switches
 
-  --bootstrap <script>  Bootstrap script for testsuite.
-  --phpcs <ruleset>     Ruleset for PHP_CodeSniffer (default: PEAR)
-  --phpmd <ruleset,...> Ruleset(s) for PHPMD
-                        (default: codesize,design,naming,unusedcode)
+    --name <name>         Name of the project.
+    --source <directory>  Directory with the project's sources.
+    --tests <directory>   Directory with the project's tests.
 
-  --help                Prints this usage information.
-  --version             Prints the version and exits.
+  Optional switches
+
+    --bootstrap <script>  Bootstrap script for testsuite.
+    --phpcs <ruleset>     Ruleset for PHP_CodeSniffer (default: PEAR)
+    --phpmd <ruleset,...> Ruleset(s) for PHPMD
+                          (default: codesize,design,naming,unusedcode)
+
+  --help                  Prints this usage information.
+  --version               Prints the version and exits.
 
 EOT;
     }
