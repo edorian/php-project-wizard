@@ -81,15 +81,7 @@ class PPW_TextUI_Command
           new ezcConsoleOption(
             '',
             'source',
-            ezcConsoleInput::TYPE_STRING,
-            NULL,
-            FALSE,
-            '',
-            '',
-            array(),
-            array(),
-            TRUE,
-            TRUE
+            ezcConsoleInput::TYPE_STRING
            )
         );
 
@@ -97,15 +89,7 @@ class PPW_TextUI_Command
           new ezcConsoleOption(
             '',
             'tests',
-            ezcConsoleInput::TYPE_STRING,
-            NULL,
-            FALSE,
-            '',
-            '',
-            array(),
-            array(),
-            TRUE,
-            TRUE
+            ezcConsoleInput::TYPE_STRING
            )
         );
 
@@ -213,6 +197,23 @@ class PPW_TextUI_Command
         $preset    = 'PPW_Preset_' . $input->getOption('preset')->value;
         $preset    = new $preset;
         $preset    = $preset->getConfiguration();
+
+        if (!$source && isset($preset['source'])) {
+            $source = $preset['source'];
+        }
+
+        if (!$tests && isset($preset['tests'])) {
+            $tests = $preset['tests'];
+        }
+
+        if (!$source || !$tests) {
+            self::showHelp();
+
+            print "\nYou need to pass either both --source and --tests or \n" .
+                  "use a preset that provides the respective values.\n";
+
+            exit(1);
+        }
 
         if ($bootstrap) {
             $bootstrap = 'bootstrap="' . $bootstrap . '"' . "\n         ";
