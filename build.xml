@@ -1,0 +1,7 @@
+<project name="ppw" default="phpab" basedir=".">
+ <target name="phpab">
+  <exec executable="phpab">
+   <arg line='-o PPW/Autoload.php -c -t PPW/Autoload.php.in --indent "          " PPW' />
+  </exec>
+ </target>
+</project>
