@@ -38,34 +38,91 @@
  * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright 2009-2011 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @since     File available since Release 1.0.0
+ * @since     File available since Release 1.0.2
  */
 
-require_once 'Text/Template/Autoload.php';
-require_once 'ezc/Base/base.php';
-
-function ppw_autoload($class)
+/**
+ * Abstract base class for processors.
+ *
+ * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @copyright 2011 Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @version   Release: @package_version@
+ * @link      http://github.com/sebastianbergmann/php-project-wizard/tree
+ * @since     Class available since Release 1.0.2
+ */
+abstract class PPW_Processor
 {
-    static $classes = NULL;
-    static $path    = NULL;
+    /**
+     * @var Text_Template
+     */
+    protected $template;
 
-    if ($classes === NULL) {
-        $classes = array(
-          'ppw_processor' => '/Processor.php',
-          'ppw_processor_ant' => '/Processor/Ant.php',
-          'ppw_processor_phpunit' => '/Processor/PHPUnit.php',
-          'ppw_textui_command' => '/TextUI/Command.php'
+    /**
+     * @var string
+     */
+    protected $target;
+
+    /**
+     * @var string
+     */
+    protected $generated;
+
+    /**
+     * @var string
+     */
+    protected $projectName;
+
+    /**
+     * @var string
+     */
+    protected $source;
+
+    /**
+     * @param Text_Template $template
+     * @param string        $target
+     */
+    public function __construct(Text_Template $template, $target)
+    {
+        $this->template = $template;
+        $this->target   = $target;
+    }
+
+    /**
+     * @param string $generated
+     */
+    public function setGenerated($generated)
+    {
+        $this->generated = $generated;
+    }
+
+    /**
+     * @param string $projectName
+     */
+    public function setProjectName($projectName)
+    {
+        $this->projectName = $projectName;
+    }
+
+    /**
+     * @param string $source
+     */
+    public function setSourcesFolder($source)
+    {
+        $this->source = $source;
+    }
+
+    /**
+     */
+    public function render()
+    {
+        $this->template->setVar(
+          array(
+            'generated'    => $this->generated,
+            'project_name' => $this->projectName
+          )
         );
 
-        $path = dirname(__FILE__);
-    }
-
-    $cn = strtolower($class);
-
-    if (isset($classes[$cn])) {
-        require $path . $classes[$cn];
+        $this->template->renderTo($this->target);
     }
 }
-
-spl_autoload_register('ppw_autoload');
-spl_autoload_register(array('ezcBase', 'autoload'));

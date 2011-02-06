@@ -186,6 +186,7 @@ class PPW_TextUI_Command
         }
 
         $templatePath = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR .
+                        'Processor' . DIRECTORY_SEPARATOR .
                         'Template' . DIRECTORY_SEPARATOR;
 
         if (isset($arguments[0])) {
@@ -208,27 +209,27 @@ class PPW_TextUI_Command
           date('D M j G:i:s T Y', $_SERVER['REQUEST_TIME'])
         );
 
-        $buildXmlTemplate = new Text_Template($templatePath . 'build.xml');
-        $_target          = $target . DIRECTORY_SEPARATOR . 'build.xml';
+        $template = new Text_Template($templatePath . 'build.xml');
+        $_target  = $target . DIRECTORY_SEPARATOR . 'build.xml';
 
-        $buildXml = new PPW_Template_BuildXmlProcessor($buildXmlTemplate, $_target);
-        $buildXml->setGenerated($generated);
-        $buildXml->setProjectName($name);
-        $buildXml->setSourcesFolder($source);
-        $buildXml->render();
+        $processor = new PPW_Processor_Ant($template, $_target);
+        $processor->setGenerated($generated);
+        $processor->setProjectName($name);
+        $processor->setSourcesFolder($source);
+        $processor->render();
 
         print "\nWrote build script for Apache Ant to " . $_target;
 
-        $phpunitTemplate = new Text_Template($templatePath . 'phpunit.xml');
-        $_target         = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
+        $template = new Text_Template($templatePath . 'phpunit.xml');
+        $_target  = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
 
-        $phpunitXml = new PPW_Template_PhpUnitXmlProcessor($phpunitTemplate, $_target);
-        $phpunitXml->setGenerated($generated);
-        $phpunitXml->setProjectName($name);
-        $phpunitXml->setSourcesFolder($source);
-        $phpunitXml->setTestsFolder($tests);
-        $phpunitXml->setBootstrapFile($bootstrap);
-        $phpunitXml->render();
+        $processor = new PPW_Processor_PHPUnit($template, $_target);
+        $processor->setGenerated($generated);
+        $processor->setProjectName($name);
+        $processor->setSourcesFolder($source);
+        $processor->setTestsFolder($tests);
+        $processor->setBootstrapFile($bootstrap);
+        $processor->render();
 
         print "\nWrote configuration for PHPUnit to " . $_target . "\n";
     }

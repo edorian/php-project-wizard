@@ -38,34 +38,31 @@
  * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright 2009-2011 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @since     File available since Release 1.0.0
+ * @since     File available since Release 1.0.2
  */
 
-require_once 'Text/Template/Autoload.php';
-require_once 'ezc/Base/base.php';
-
-function ppw_autoload($class)
+/**
+ * Processor for Apache Ant build script.
+ *
+ * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @copyright 2011 Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @version   Release: @package_version@
+ * @link      http://github.com/sebastianbergmann/php-project-wizard/tree
+ * @since     Class available since Release 1.0.2
+ */
+class PPW_Processor_Ant extends PPW_Processor
 {
-    static $classes = NULL;
-    static $path    = NULL;
-
-    if ($classes === NULL) {
-        $classes = array(
-          'ppw_processor' => '/Processor.php',
-          'ppw_processor_ant' => '/Processor/Ant.php',
-          'ppw_processor_phpunit' => '/Processor/PHPUnit.php',
-          'ppw_textui_command' => '/TextUI/Command.php'
+    /**
+     */
+    public function render()
+    {
+        $this->template->setVar(
+          array(
+            'source_property' => $this->source
+          )
         );
 
-        $path = dirname(__FILE__);
-    }
-
-    $cn = strtolower($class);
-
-    if (isset($classes[$cn])) {
-        require $path . $classes[$cn];
+        parent::render();
     }
 }
-
-spl_autoload_register('ppw_autoload');
-spl_autoload_register(array('ezcBase', 'autoload'));
