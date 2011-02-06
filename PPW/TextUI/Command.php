@@ -209,8 +209,8 @@ class PPW_TextUI_Command
         );
 
         $buildXmlTemplate = new Text_Template($templatePath . 'build.xml');
-        $_target = $target . DIRECTORY_SEPARATOR . 'build.xml';
-        
+        $_target          = $target . DIRECTORY_SEPARATOR . 'build.xml';
+
         $buildXml = new PPW_Template_BuildXmlProcessor($buildXmlTemplate, $_target);
         $buildXml->setGenerated($generated);
         $buildXml->setProjectName($name);
@@ -220,7 +220,7 @@ class PPW_TextUI_Command
         print "\nWrote build script for Apache Ant to " . $_target;
 
         $phpunitTemplate = new Text_Template($templatePath . 'phpunit.xml');
-        $_target = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
+        $_target         = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
 
         $phpunitXml = new PPW_Template_PhpUnitXmlProcessor($phpunitTemplate, $_target);
         $phpunitXml->setGenerated($generated);

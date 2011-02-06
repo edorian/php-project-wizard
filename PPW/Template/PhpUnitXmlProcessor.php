@@ -8,27 +8,33 @@ class PPW_Template_PhpUnitXmlProcessor extends PPW_Template_TemplateProcessor {
     protected $bootstrap;
     protected $tests;
 
-    public function setGenerated($generated) {
+    public function setGenerated($generated)
+    {
         $this->generated = $generated;
     }
 
-    public function setProjectName($projectName) {
+    public function setProjectName($projectName)
+    {
         $this->projectName = $projectName;
     }
 
-    public function setSourcesFolder($source) {
+    public function setSourcesFolder($source)
+    {
         $this->source = $source;
     }
 
-    public function setTestsFolder($tests) {
+    public function setTestsFolder($tests)
+    {
         $this->tests = $tests;
     }
 
-    public function setBootstrapFile($bootstrap) {
+    public function setBootstrapFile($bootstrap)
+    {
         $this->bootstrap = $bootstrap;
     }
 
-    public function render() {
+    public function render()
+    {
         $this->template->setVar(
             array(
                 'generated'    => $this->generated,
