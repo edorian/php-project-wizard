@@ -2,7 +2,7 @@
 <!-- {generated} -->
 
 <project name="{project_name}" default="build" basedir=".">
- <property file="build.properties"/>
+ <property name="source" value="{source_property}"/>
 
  <target name="clean">
   <!-- Clean up -->
