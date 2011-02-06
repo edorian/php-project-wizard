@@ -54,12 +54,40 @@
 class PPW_Processor_Ant extends PPW_Processor
 {
     /**
+     * @var string
+     */
+    protected $phpcs;
+
+    /**
+     * @var string
+     */
+    protected $phpmd;
+
+    /**
+     * @param string $projectName
+     */
+    public function setPHPCSRules($rules)
+    {
+        $this->phpcs = $rules;
+    }
+
+    /**
+     * @param string $projectName
+     */
+    public function setPHPMDRules($rules)
+    {
+        $this->phpmd = $rules;
+    }
+
+    /**
      */
     public function render()
     {
         $this->template->setVar(
           array(
-            'source_property' => $this->source
+            'source_property' => $this->source,
+            'phpcs_rules'     => $this->phpcs,
+            'phpmd_rules'     => $this->phpmd
           )
         );
 

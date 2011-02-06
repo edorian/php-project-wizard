@@ -119,6 +119,26 @@ class PPW_TextUI_Command
 
         $input->registerOption(
           new ezcConsoleOption(
+            '',
+            'phpcs',
+            ezcConsoleInput::TYPE_STRING,
+            'PEAR',
+            FALSE
+           )
+        );
+
+        $input->registerOption(
+          new ezcConsoleOption(
+            '',
+            'phpmd',
+            ezcConsoleInput::TYPE_STRING,
+            'codesize,design,naming,unusedcode',
+            FALSE
+           )
+        );
+
+        $input->registerOption(
+          new ezcConsoleOption(
             'h',
             'help',
             ezcConsoleInput::TYPE_NONE,
@@ -178,6 +198,8 @@ class PPW_TextUI_Command
         $source    = $input->getOption('source')->value;
         $tests     = $input->getOption('tests')->value;
         $bootstrap = $input->getOption('bootstrap')->value;
+        $phpcs     = $input->getOption('phpcs')->value;
+        $phpmd     = $input->getOption('phpmd')->value;
 
         if ($bootstrap) {
             $bootstrap = 'bootstrap="' . $bootstrap . '"' . "\n         ";
@@ -216,6 +238,8 @@ class PPW_TextUI_Command
         $processor->setGenerated($generated);
         $processor->setProjectName($name);
         $processor->setSourcesFolder($source);
+        $processor->setPHPCSRules($phpcs);
+        $processor->setPHPMDRules($phpmd);
         $processor->render();
 
         print "\nWrote build script for Apache Ant to " . $_target;
@@ -245,9 +269,13 @@ class PPW_TextUI_Command
 Usage: ppw [switches] <directory>
 
   --name <name>         Name of the project.
-  --bootstrap <script>  Bootstrap script for testsuite.
   --source <directory>  Directory with the project's sources.
   --tests <directory>   Directory with the project's tests.
+
+  --bootstrap <script>  Bootstrap script for testsuite.
+  --phpcs <ruleset>     Ruleset for PHP_CodeSniffer (default: PEAR)
+  --phpmd <ruleset,...> Ruleset(s) for PHPMD
+                        (default: codesize,design,naming,unusedcode)
 
   --help                Prints this usage information.
   --version             Prints the version and exits.
