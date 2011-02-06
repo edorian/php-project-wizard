@@ -273,6 +273,7 @@ Usage: ppw [switches] <directory>
     --name <name>         Name of the project.
     --source <directory>  Directory with the project's sources.
     --tests <directory>   Directory with the project's tests.
+    For multiple directories use a comma seperated list of folders.
 
   Optional switches
 

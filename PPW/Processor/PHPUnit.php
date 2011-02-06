@@ -83,14 +83,36 @@ class PPW_Processor_PHPUnit extends PPW_Processor
      */
     public function render()
     {
+        $testdirectories = $this->getTestsuiteXML($this->tests);
         $this->template->setVar(
           array(
             'bootstrap' => $this->bootstrap,
-            'source'    => $this->source,
-            'tests'     => $this->tests
+            'source'    => $this->getWhitelistXml($this->source),
+            'test'      => $this->getTestsuiteXML($this->tests)
           )
         );
 
         parent::render();
     }
+
+    private function getTestsuiteXML($tests)
+    {
+        $folders = explode(",", $tests);
+        $xml     = "";
+        foreach($folders as $folder) {
+            $xml .='<directory suffix="Test.php">'.$folder.'</directory>'.PHP_EOL;
+        }
+        return $xml;
+    }
+
+    private function getWhitelistXml($source)
+    {
+        $folders = explode(",", $source);
+        $xml     = "";
+        foreach($folders as $folder) {
+            $xml .='<directory suffix=".php">'.$folder.'</directory>'.PHP_EOL;
+        }
+        return $xml;
+    }
+
 }

@@ -7,7 +7,7 @@
          verbose="true">
   <testsuites>
     <testsuite name="{project_name}">
-      <directory suffix="Test.php">{tests}</directory>
+      {test}
     </testsuite>
   </testsuites>
 
@@ -21,7 +21,7 @@
 
   <filter>
     <whitelist addUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">{source}</directory>
+      {source}
     </whitelist>
   </filter>
 </phpunit>

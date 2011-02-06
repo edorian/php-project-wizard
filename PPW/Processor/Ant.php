@@ -85,9 +85,10 @@ class PPW_Processor_Ant extends PPW_Processor
     {
         $this->template->setVar(
           array(
-            'source_property' => $this->source,
-            'phpcs_rules'     => $this->phpcs,
-            'phpmd_rules'     => $this->phpmd
+            'source_property'       => strtr($this->source, ",", " "),
+            'source_property_comma' => $this->source,
+            'phpcs_rules'           => $this->phpcs,
+            'phpmd_rules'           => $this->phpmd
           )
         );
 
