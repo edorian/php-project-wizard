@@ -34,9 +34,9 @@ Using the `ppw` commandline tool we can now generate the scripts and configurati
     sb@vmware bankaccount % ppw --source src --tests tests --name bankaccount --bootstrap src/autoload.php
     PHP Project Wizard (PPW) 1.0.0 by Sebastian Bergmann.
 
-    Wrote build script for Apache Ant to /usr/local/src/ppw/PPW/Template/build.xml
-    Wrote build configuration for Apache Ant to /usr/local/src/ppw/PPW/Template/build.properties
-    Wrote configuration for PHPUnit to /usr/local/src/ppw/PPW/Template/phpunit.xml.dist
+    Wrote build script for Apache Ant to /usr/local/src/bankaccount/build.xml
+    Wrote build configuration for Apache Ant to /usr/local/src/bankaccount/build.properties
+    Wrote configuration for PHPUnit to /usr/local/src/bankaccount/phpunit.xml.dist
 
 Executing the generated build script with Apache Ant will produce the following `build` directory:
 

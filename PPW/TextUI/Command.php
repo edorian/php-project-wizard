@@ -217,10 +217,9 @@ class PPW_TextUI_Command
           )
         );
 
-        print "\nWrote build script for Apache Ant to " . $templatePath .
-              'build.xml';
-
-        $buildXml->renderTo($target . DIRECTORY_SEPARATOR . 'build.xml');
+        $_target = $target . DIRECTORY_SEPARATOR . 'build.xml';
+        $buildXml->renderTo($_target);
+        print "\nWrote build script for Apache Ant to " . $_target;
 
         $properties = new Text_Template($templatePath . 'build.properties');
 
@@ -231,10 +230,9 @@ class PPW_TextUI_Command
           )
         );
 
-        $properties->renderTo($target . DIRECTORY_SEPARATOR . 'build.properties');
-
-        print "\nWrote build configuration for Apache Ant to " . $templatePath .
-              'build.properties';
+        $_target = $target . DIRECTORY_SEPARATOR . 'build.properties';
+        $properties->renderTo($_target);
+        print "\nWrote build configuration for Apache Ant to " . $_target;
 
         $phpunit = new Text_Template($templatePath . 'phpunit.xml');
 
@@ -247,10 +245,10 @@ class PPW_TextUI_Command
           )
         );
 
-        $phpunit->renderTo($target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist');
+        $_target = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
+        $phpunit->renderTo($_target);
 
-        print "\nWrote configuration for PHPUnit to " . $templatePath .
-              "phpunit.xml.dist\n";
+        print "\nWrote configuration for PHPUnit to " . $_target . "\n";
     }
 
     /**
