@@ -139,6 +139,16 @@ class PPW_TextUI_Command
 
         $input->registerOption(
           new ezcConsoleOption(
+            '',
+            'preset',
+            ezcConsoleInput::TYPE_STRING,
+            'Default',
+            FALSE
+           )
+        );
+
+        $input->registerOption(
+          new ezcConsoleOption(
             'h',
             'help',
             ezcConsoleInput::TYPE_NONE,
@@ -200,16 +210,15 @@ class PPW_TextUI_Command
         $bootstrap = $input->getOption('bootstrap')->value;
         $phpcs     = $input->getOption('phpcs')->value;
         $phpmd     = $input->getOption('phpmd')->value;
+        $preset    = 'PPW_Preset_' . $input->getOption('preset')->value;
+        $preset    = new $preset;
+        $preset    = $preset->getConfiguration();
 
         if ($bootstrap) {
             $bootstrap = 'bootstrap="' . $bootstrap . '"' . "\n         ";
         } else {
             $bootstrap = '';
         }
-
-        $templatePath = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR .
-                        'Processor' . DIRECTORY_SEPARATOR .
-                        'Template' . DIRECTORY_SEPARATOR;
 
         if (isset($arguments[0])) {
             $target = $arguments[0];
@@ -231,7 +240,7 @@ class PPW_TextUI_Command
           date('D M j G:i:s T Y', $_SERVER['REQUEST_TIME'])
         );
 
-        $template = new Text_Template($templatePath . 'build.xml');
+        $template = new Text_Template($preset['build.xml']);
         $_target  = $target . DIRECTORY_SEPARATOR . 'build.xml';
 
         $processor = new PPW_Processor_Ant($template, $_target);
@@ -244,7 +253,7 @@ class PPW_TextUI_Command
 
         print "\nWrote build script for Apache Ant to " . $_target;
 
-        $template = new Text_Template($templatePath . 'phpunit.xml');
+        $template = new Text_Template($preset['phpunit.xml']);
         $_target  = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
 
         $processor = new PPW_Processor_PHPUnit($template, $_target);
@@ -276,10 +285,11 @@ Usage: ppw [switches] <directory>
 
   Optional switches
 
+    --preset <preset>     Preset to use.
+
     --bootstrap <script>  Bootstrap script for testsuite.
-    --phpcs <ruleset>     Ruleset for PHP_CodeSniffer (default: PEAR)
-    --phpmd <ruleset,...> Ruleset(s) for PHPMD
-                          (default: codesize,design,naming,unusedcode)
+    --phpcs <ruleset>     Ruleset for PHP_CodeSniffer.
+    --phpmd <ruleset,...> Ruleset(s) for PHPMD.
 
   --help                  Prints this usage information.
   --version               Prints the version and exits.

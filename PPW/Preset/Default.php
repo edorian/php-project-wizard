@@ -38,36 +38,29 @@
  * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright 2009-2011 Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
- * @since     File available since Release 1.0.0
+ * @since     File available since Release 1.1.0
  */
 
-require_once 'Text/Template/Autoload.php';
-require_once 'ezc/Base/base.php';
-
-function ppw_autoload($class)
+/**
+ * Default preset for PHP projects.
+ *
+ * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @copyright 2011 Sebastian Bergmann <sb@sebastian-bergmann.de>
+ * @license   http://www.opensource.org/licenses/bsd-license.php  BSD License
+ * @version   Release: @package_version@
+ * @link      http://github.com/sebastianbergmann/php-project-wizard/tree
+ * @since     Class available since Release 1.1.0
+ */
+class PPW_Preset_Default extends PPW_Preset
 {
-    static $classes = NULL;
-    static $path    = NULL;
+    public function getConfiguration()
+    {
+        $templatePath = dirname(__FILE__) . DIRECTORY_SEPARATOR .
+                        'Default' . DIRECTORY_SEPARATOR;
 
-    if ($classes === NULL) {
-        $classes = array(
-          'ppw_preset' => '/Preset.php',
-          'ppw_preset_default' => '/Preset/Default.php',
-          'ppw_processor' => '/Processor.php',
-          'ppw_processor_ant' => '/Processor/Ant.php',
-          'ppw_processor_phpunit' => '/Processor/PHPUnit.php',
-          'ppw_textui_command' => '/TextUI/Command.php'
+        return array(
+          'build.xml'   => $templatePath . 'build.xml',
+          'phpunit.xml' => $templatePath . 'phpunit.xml'
         );
-
-        $path = dirname(__FILE__);
-    }
-
-    $cn = strtolower($class);
-
-    if (isset($classes[$cn])) {
-        require $path . $classes[$cn];
     }
 }
-
-spl_autoload_register('ppw_autoload');
-spl_autoload_register(array('ezcBase', 'autoload'));
