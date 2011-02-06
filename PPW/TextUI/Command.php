@@ -246,7 +246,7 @@ Usage: ppw [switches] <directory>
   --name <name>         Name of the project.
   --bootstrap <script>  Bootstrap script for testsuite.
   --source <directory>  Directory with the project's sources.
-  --tests <directory>   Directory with the project's tests. 
+  --tests <directory>   Directory with the project's tests.
 
   --help                Prints this usage information.
   --version             Prints the version and exits.
