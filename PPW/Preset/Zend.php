@@ -54,15 +54,18 @@
 class PPW_Preset_Zend extends PPW_Preset_Default
 {
     /**
-     * @return array
+     * @return string
      */
-    public function getConfiguration()
+    public function getSourceDirectory()
     {
-        $configuration = parent::getConfiguration();
+        return 'application';
+    }
 
-        $configuration['source'] = 'application';
-        $configuration['tests']  = 'tests';
-
-        return $configuration;
+    /**
+     * @return string
+     */
+    public function getTestsDirectory()
+    {
+        return 'tests';
     }
 }

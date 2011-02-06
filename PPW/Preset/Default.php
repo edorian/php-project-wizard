@@ -51,19 +51,35 @@
  * @link      http://github.com/sebastianbergmann/php-project-wizard/tree
  * @since     Class available since Release 1.1.0
  */
-class PPW_Preset_Default implements PPW_Preset
+class PPW_Preset_Default extends PPW_Preset
 {
     /**
-     * @return array
+     * @var string
      */
-    public function getConfiguration()
-    {
-        $templatePath = dirname(__FILE__) . DIRECTORY_SEPARATOR .
-                        'Default' . DIRECTORY_SEPARATOR;
+    protected $templatePath;
 
-        return array(
-          'build.xml'   => $templatePath . 'build.xml',
-          'phpunit.xml' => $templatePath . 'phpunit.xml'
-        );
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->templatePath = dirname(__FILE__) . DIRECTORY_SEPARATOR .
+                             'Default' . DIRECTORY_SEPARATOR;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAntTemplate()
+    {
+        return $this->templatePath . 'build.xml';
+    }
+
+    /**
+     * @return string
+     */
+    public function getPHPUnitTemplate()
+    {
+        return $this->templatePath . 'phpunit.xml';
     }
 }

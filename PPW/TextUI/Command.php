@@ -196,14 +196,13 @@ class PPW_TextUI_Command
         $phpmd     = $input->getOption('phpmd')->value;
         $preset    = 'PPW_Preset_' . $input->getOption('preset')->value;
         $preset    = new $preset;
-        $preset    = $preset->getConfiguration();
 
-        if (!$source && isset($preset['source'])) {
-            $source = $preset['source'];
+        if (!$source) {
+            $source = $preset->getSourceDirectory();
         }
 
-        if (!$tests && isset($preset['tests'])) {
-            $tests = $preset['tests'];
+        if (!$tests) {
+            $tests = $preset->getTestsDirectory();
         }
 
         if (!$source || !$tests) {
@@ -241,7 +240,7 @@ class PPW_TextUI_Command
           date('D M j G:i:s T Y', $_SERVER['REQUEST_TIME'])
         );
 
-        $template = new Text_Template($preset['build.xml']);
+        $template = new Text_Template($preset->getAntTemplate());
         $_target  = $target . DIRECTORY_SEPARATOR . 'build.xml';
 
         $processor = new PPW_Processor_Ant($template, $_target);
@@ -254,7 +253,7 @@ class PPW_TextUI_Command
 
         print "\nWrote build script for Apache Ant to " . $_target;
 
-        $template = new Text_Template($preset['phpunit.xml']);
+        $template = new Text_Template($preset->getPHPUnitTemplate());
         $_target  = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
 
         $processor = new PPW_Processor_PHPUnit($template, $_target);
