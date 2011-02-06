@@ -2,7 +2,8 @@
 
 class PPW_Processor_PHPUnitTest extends PHPUnit_Framework_TestCase {
 
-    public function testRender() {
+    public function testRender()
+    {
         $template = $this->getMock("Text_Template");
         $template->expects($this->at(0))
                  ->method("setVar")
