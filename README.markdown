@@ -32,7 +32,7 @@ Consider the following directory structure:
 Using the `ppw` commandline tool we can now generate the scripts and configuration files necessary for build automation:
 
     sb@vmware bankaccount % ppw --source src --tests tests --name bankaccount --bootstrap src/autoload.php
-    PHP Project Wizard (PPW) 1.0.1 by Sebastian Bergmann.
+    PHP Project Wizard (PPW) 1.0.2 by Sebastian Bergmann.
 
     Wrote build script for Apache Ant to /usr/local/src/bankaccount/build.xml
     Wrote configuration for PHPUnit to /usr/local/src/bankaccount/phpunit.xml.dist
