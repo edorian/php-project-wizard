@@ -51,7 +51,7 @@
  * @link      http://github.com/sebastianbergmann/php-project-wizard/tree
  * @since     Class available since Release 1.1.0
  */
-class PPW_Preset_Default extends PPW_Preset
+class PPW_Preset_Default implements PPW_Preset
 {
     /**
      * @return array

@@ -42,7 +42,7 @@
  */
 
 /**
- * Abstract base class for presets.
+ * Interface for preset classes.
  *
  * @author    Sebastian Bergmann <sb@sebastian-bergmann.de>
  * @copyright 2011 Sebastian Bergmann <sb@sebastian-bergmann.de>
@@ -51,6 +51,10 @@
  * @link      http://github.com/sebastianbergmann/php-project-wizard/tree
  * @since     Class available since Release 1.1.0
  */
-abstract class PPW_Preset
+interface PPW_Preset
 {
+    /**
+     * @return array
+     */
+    public function getConfiguration();
 }
