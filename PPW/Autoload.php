@@ -44,16 +44,16 @@
 require_once 'Text/Template/Autoload.php';
 require_once 'ezc/Base/base.php';
 
-function ppw_autoload($class) {
+function ppw_autoload($class)
+{
     static $classes = NULL;
-    static $path = NULL;
+    static $path    = NULL;
 
     if ($classes === NULL) {
         $classes = array(
           'ppw_textui_command' => '/TextUI/Command.php',
           'ppw_template_templateprocessor' => '/Template/TemplateProcessor.php',
           'ppw_template_buildxmlprocessor' => '/Template/BuildXmlProcessor.php',
-          'ppw_template_buildpropertiesprocessor' => '/Template/BuildPropertiesProcessor.php',
           'ppw_template_phpunitxmlprocessor' => '/Template/PhpUnitXmlProcessor.php',
         );
 

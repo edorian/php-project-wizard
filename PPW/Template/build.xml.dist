@@ -2,7 +2,7 @@
 <!-- {generated} -->
 
 <project name="{project_name}" default="build" basedir=".">
- <property file="build.properties"/>
+ <property name="source" value="{source_property}"/>
 
  <target name="clean">
   <!-- Clean up -->
@@ -18,9 +18,7 @@
 
  <!-- Run unit tests and generate junit.xml and clover.xml -->
  <target name="phpunit">
-  <exec executable="phpunit" failonerror="true">
-   <arg line="${tests}" />
-  </exec>
+  <exec executable="phpunit" failonerror="true"/>
  </target>
 
  <!-- Run the pdepend, phpmd, phpcpd, phpcs, phpdoc and phploc tasks

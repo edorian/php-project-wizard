@@ -5,6 +5,12 @@
          backupStaticAttributes="false"
          strict="true"
          verbose="true">
+  <testsuites>
+    <testsuite name="{project_name}">
+      <directory suffix="Test.php">{tests}</directory>
+    </testsuite>
+  </testsuites>
+
   <logging>
     <log type="coverage-html" target="build/coverage" title="{project_name}"
          charset="UTF-8" yui="true" highlight="true"

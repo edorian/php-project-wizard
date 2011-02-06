@@ -6,6 +6,7 @@ class PPW_Template_PhpUnitXmlProcessor extends PPW_Template_TemplateProcessor {
     protected $projectName;
     protected $source;
     protected $bootstrap;
+    protected $tests;
 
     public function setGenerated($generated) {
         $this->generated = $generated;
@@ -19,6 +20,10 @@ class PPW_Template_PhpUnitXmlProcessor extends PPW_Template_TemplateProcessor {
         $this->source = $source;
     }
 
+    public function setTestsFolder($tests) {
+        $this->tests = $tests;
+    }
+
     public function setBootstrapFile($bootstrap) {
         $this->bootstrap = $bootstrap;
     }
@@ -29,6 +34,7 @@ class PPW_Template_PhpUnitXmlProcessor extends PPW_Template_TemplateProcessor {
                 'generated'    => $this->generated,
                 'project_name' => $this->projectName,
                 'source'       => $this->source,
+                'tests'        => $this->tests,
                 'bootstrap'    => $this->bootstrap
             )
         );

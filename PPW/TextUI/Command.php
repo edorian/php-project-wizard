@@ -214,19 +214,10 @@ class PPW_TextUI_Command
         $buildXml = new PPW_Template_BuildXmlProcessor($buildXmlTemplate, $_target);
         $buildXml->setGenerated($generated);
         $buildXml->setProjectName($name);
+        $buildXml->setSourcesFolder($source);
         $buildXml->render();
 
         print "\nWrote build script for Apache Ant to " . $_target;
-
-        $propertiesTemplate = new Text_Template($templatePath . 'build.properties');
-        $_target = $target . DIRECTORY_SEPARATOR . 'build.properties';
-
-        $properties = new PPW_Template_BuildPropertiesProcessor($propertiesTemplate, $_target);
-        $properties->setSourcesFolder($source);
-        $properties->setTestsFolder($tests);
-        $properties->render();
- 
-        print "\nWrote build configuration for Apache Ant to " . $_target;
 
         $phpunitTemplate = new Text_Template($templatePath . 'phpunit.xml');
         $_target = $target . DIRECTORY_SEPARATOR . 'phpunit.xml.dist';
@@ -235,8 +226,8 @@ class PPW_TextUI_Command
         $phpunitXml->setGenerated($generated);
         $phpunitXml->setProjectName($name);
         $phpunitXml->setSourcesFolder($source);
+        $phpunitXml->setTestsFolder($tests);
         $phpunitXml->setBootstrapFile($bootstrap);
-
         $phpunitXml->render();
 
         print "\nWrote configuration for PHPUnit to " . $_target . "\n";
@@ -256,7 +247,6 @@ Usage: ppw [switches] <directory>
   --bootstrap <script>  Bootstrap script for testsuite.
   --source <directory>  Directory with the project's sources.
   --tests <directory>   Directory with the project's tests. 
-                        Multiple directories can be serperated by comma.
 
   --help                Prints this usage information.
   --version             Prints the version and exits.
