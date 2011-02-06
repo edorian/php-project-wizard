@@ -59,7 +59,9 @@ class PPW_Processor_AntTest extends PHPUnit_Framework_TestCase
 
         $template->expects($this->at(0))
                  ->method('setVar')
-                 ->with(array('source_property' => 'MySource'));
+                 ->with(array('source_property' => 'MySource',
+                              'phpcs_rules'     => 'MyCsRules',
+                              'phpmd_rules'     => 'MyPmdRules'));
 
         $template->expects($this->at(1))
                  ->method('setVar')
@@ -74,6 +76,8 @@ class PPW_Processor_AntTest extends PHPUnit_Framework_TestCase
         $antProcessor->setGenerated('123');
         $antProcessor->setProjectName('MyProject');
         $antProcessor->setSourcesFolder('MySource');
+        $antProcessor->setPHPCSRules('MyCsRules');
+        $antProcessor->setPHPMDRules('MyPmdRules');
         $antProcessor->render();
     }
 }
