@@ -82,4 +82,20 @@ class PPW_Preset_Default extends PPW_Preset
     {
         return $this->templatePath . 'phpunit.xml';
     }
+
+    /**
+     * @return string
+     */
+    public function getPHPCSRules()
+    {
+        return 'PEAR';
+    }
+
+    /**
+     * @return string
+     */
+    public function getPHPMDRules()
+    {
+        return 'codesize,design,naming,unusedcode';
+    }
 }

@@ -80,4 +80,18 @@ abstract class PPW_Preset
     public function getTestsDirectory()
     {
     }
+
+    /**
+     * @return string
+     */
+    public function getPHPCSRules()
+    {
+    }
+
+    /**
+     * @return string
+     */
+    public function getPHPMDRules()
+    {
+    }
 }

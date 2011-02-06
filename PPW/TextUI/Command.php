@@ -105,9 +105,7 @@ class PPW_TextUI_Command
           new ezcConsoleOption(
             '',
             'phpcs',
-            ezcConsoleInput::TYPE_STRING,
-            'PEAR',
-            FALSE
+            ezcConsoleInput::TYPE_STRING
            )
         );
 
@@ -115,9 +113,7 @@ class PPW_TextUI_Command
           new ezcConsoleOption(
             '',
             'phpmd',
-            ezcConsoleInput::TYPE_STRING,
-            'codesize,design,naming,unusedcode',
-            FALSE
+            ezcConsoleInput::TYPE_STRING
            )
         );
 
@@ -205,6 +201,10 @@ class PPW_TextUI_Command
             $tests = $preset->getTestsDirectory();
         }
 
+        if (!$tests) {
+            $tests = $preset->getTestsDirectory();
+        }
+
         if (!$source || !$tests) {
             self::showHelp();
 
@@ -212,6 +212,14 @@ class PPW_TextUI_Command
                   "use a preset that provides the respective values.\n";
 
             exit(1);
+        }
+
+        if (!$phpcs) {
+            $phpcs = $preset->getPHPCSRules();
+        }
+
+        if (!$phpmd) {
+            $phpmd = $preset->getPHPMDRules();
         }
 
         if ($bootstrap) {

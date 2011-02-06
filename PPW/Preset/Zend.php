@@ -68,4 +68,12 @@ class PPW_Preset_Zend extends PPW_Preset_Default
     {
         return 'tests';
     }
+
+    /**
+     * @return string
+     */
+    public function getPHPCSRules()
+    {
+        return 'Zend';
+    }
 }
