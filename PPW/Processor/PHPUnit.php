@@ -101,15 +101,7 @@ class PPW_Processor_PHPUnit extends PPW_Processor
      */
     protected function getTestsuiteXML($tests)
     {
-        $directories = explode(',', $tests);
-        $xml         = '';
-
-        foreach ($directories as $directory) {
-            $xml .= '<directory suffix="Test.php">' . $directory .
-                    "</directory>\n";
-        }
-
-        return $xml;
+        return $this->getXML($tests, 'Test.php');
     }
 
     /**
@@ -119,11 +111,21 @@ class PPW_Processor_PHPUnit extends PPW_Processor
      */
     protected function getWhitelistXml($source)
     {
-        $directories = explode(',', $source);
+        return $this->getXML($source, '.php');
+    }
+
+    /**
+     * @param  string $directories
+     * @return string
+     * @since  Method available since Release 1.1.0
+     */
+    protected function getXML($directories, $suffix)
+    {
+        $directories = explode(',', $directories);
         $xml         = '';
 
         foreach ($directories as $directory) {
-            $xml .= '<directory suffix=".php">' . $directory .
+            $xml .= '<directory suffix="' . $suffix . '">' . $directory .
                     "</directory>\n";
         }
 
