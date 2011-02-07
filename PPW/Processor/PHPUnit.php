@@ -83,7 +83,6 @@ class PPW_Processor_PHPUnit extends PPW_Processor
      */
     public function render()
     {
-        $testdirectories = $this->getTestsuiteXML($this->tests);
         $this->template->setVar(
           array(
             'bootstrap' => $this->bootstrap,
@@ -95,24 +94,39 @@ class PPW_Processor_PHPUnit extends PPW_Processor
         parent::render();
     }
 
-    private function getTestsuiteXML($tests)
+    /**
+     * @param  string $tests
+     * @return string
+     * @since  Method available since Release 1.1.0
+     */
+    protected function getTestsuiteXML($tests)
     {
-        $folders = explode(",", $tests);
-        $xml     = "";
-        foreach($folders as $folder) {
-            $xml .='<directory suffix="Test.php">'.$folder.'</directory>'.PHP_EOL;
+        $directories = explode(',', $tests);
+        $xml         = '';
+
+        foreach ($directories as $directory) {
+            $xml .= '<directory suffix="Test.php">' . $directory .
+                    "</directory>\n";
         }
+
         return $xml;
     }
 
-    private function getWhitelistXml($source)
+    /**
+     * @param  string $tests
+     * @return string
+     * @since  Method available since Release 1.1.0
+     */
+    protected function getWhitelistXml($source)
     {
-        $folders = explode(",", $source);
-        $xml     = "";
-        foreach($folders as $folder) {
-            $xml .='<directory suffix=".php">'.$folder.'</directory>'.PHP_EOL;
+        $directories = explode(',', $source);
+        $xml         = '';
+
+        foreach ($directories as $directory) {
+            $xml .= '<directory suffix=".php">' . $directory .
+                    "</directory>\n";
         }
+
         return $xml;
     }
-
 }
