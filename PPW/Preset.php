@@ -94,4 +94,11 @@ abstract class PPW_Preset
     public function getPHPMDRules()
     {
     }
+
+    /**
+     * @return string
+     */
+    public function getApiDocumentationTarget()
+    {
+    }
 }

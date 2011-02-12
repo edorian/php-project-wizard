@@ -255,6 +255,7 @@ class PPW_TextUI_Command
         $processor->setGenerated($generated);
         $processor->setProjectName($name);
         $processor->setSourcesFolder($source);
+        $processor->setApiDoc($preset->getApiDocumentationTarget());
         $processor->setPHPCSRules($phpcs);
         $processor->setPHPMDRules($phpmd);
         $processor->render();

@@ -98,4 +98,14 @@ class PPW_Preset_Default extends PPW_Preset
     {
         return 'codesize,design,naming,unusedcode';
     }
+
+    /**
+     * @return string
+     */
+    public function getApiDocumentationTarget()
+    {
+        $template = new Text_Template($this->templatePath . 'phpdoc.xml');
+
+        return $template->render();
+    }
 }

@@ -56,12 +56,25 @@ class PPW_Processor_Ant extends PPW_Processor
     /**
      * @var string
      */
+    protected $apidoc;
+
+    /**
+     * @var string
+     */
     protected $phpcs;
 
     /**
      * @var string
      */
     protected $phpmd;
+
+    /**
+     * @param string $projectName
+     */
+    public function setApiDoc($apidoc)
+    {
+        $this->apidoc = $apidoc;
+    }
 
     /**
      * @param string $projectName
@@ -88,7 +101,8 @@ class PPW_Processor_Ant extends PPW_Processor
             'source_property'       => strtr($this->source, ',', ' '),
             'source_property_comma' => $this->source,
             'phpcs_rules'           => $this->phpcs,
-            'phpmd_rules'           => $this->phpmd
+            'phpmd_rules'           => $this->phpmd,
+            'apidoc'                => $this->apidoc
           )
         );
 
