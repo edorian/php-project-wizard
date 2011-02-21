@@ -187,6 +187,14 @@ class PPW_TextUI_Command
         $phpcs     = $input->getOption('phpcs')->value;
         $phpmd     = $input->getOption('phpmd')->value;
 
+        if (!is_dir($source)) {
+            mkdir($source, 0777, TRUE);
+        }
+
+        if (!is_dir($tests)) {
+            mkdir($tests, 0777, TRUE);
+        }
+
         if ($bootstrap) {
             $bootstrap = 'bootstrap="' . $bootstrap . '"' . "\n         ";
         } else {
