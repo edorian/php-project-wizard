@@ -82,14 +82,7 @@ class PPW_TextUI_Command
             '',
             'source',
             ezcConsoleInput::TYPE_STRING,
-            NULL,
-            FALSE,
-            '',
-            '',
-            array(),
-            array(),
-            TRUE,
-            TRUE
+            'src'
            )
         );
 
@@ -98,14 +91,7 @@ class PPW_TextUI_Command
             '',
             'tests',
             ezcConsoleInput::TYPE_STRING,
-            NULL,
-            FALSE,
-            '',
-            '',
-            array(),
-            array(),
-            TRUE,
-            TRUE
+            'tests'
            )
         );
 
@@ -271,10 +257,11 @@ Usage: ppw [switches] <directory>
   Mandatory switches
 
     --name <name>         Name of the project.
-    --source <directory>  Directory with the project's sources.
-    --tests <directory>   Directory with the project's tests.
 
   Optional switches
+
+    --source <directory>  Directory with the project's sources (default: src)
+    --tests <directory>   Directory with the project's tests (default: tests)
 
     --bootstrap <script>  Bootstrap script for testsuite.
     --phpcs <ruleset>     Ruleset for PHP_CodeSniffer (default: PEAR)
