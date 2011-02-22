@@ -214,6 +214,14 @@ class PPW_TextUI_Command
             exit(1);
         }
 
+        if (!is_dir($source)) {
+            mkdir($source, 0777, TRUE);
+        }
+
+        if (!is_dir($tests)) {
+            mkdir($tests, 0777, TRUE);
+        }
+
         if (!$phpcs) {
             $phpcs = $preset->getPHPCSRules();
         }
@@ -288,21 +296,22 @@ Usage: ppw [switches] <directory>
 
   Mandatory switches
 
-    --name <name>         Name of the project.
-    --source <directory>  Directory with the project's sources.
-    --tests <directory>   Directory with the project's tests.
-    For multiple directories use a comma seperated list of folders.
+    --name <name>         Name of the project
 
   Optional switches
 
-    --preset <preset>     Preset to use.
+    --preset <preset>     Preset to use
 
-    --bootstrap <script>  Bootstrap script for testsuite.
-    --phpcs <ruleset>     Ruleset for PHP_CodeSniffer.
-    --phpmd <ruleset,...> Ruleset(s) for PHPMD.
+    --source <directory>  Directory with the project's sources (default: src)
+    --tests <directory>   Directory with the project's tests (default: tests)
+    For multiple directories use a comma seperated list
 
-  --help                  Prints this usage information.
-  --version               Prints the version and exits.
+    --bootstrap <script>  Bootstrap script for testsuite
+    --phpcs <ruleset>     Ruleset for PHP_CodeSniffer
+    --phpmd <ruleset,...> Ruleset(s) for PHPMD
+
+  --help                  Prints this usage information
+  --version               Prints the version and exits
 
 EOT;
     }

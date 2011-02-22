@@ -86,6 +86,22 @@ class PPW_Preset_Default extends PPW_Preset
     /**
      * @return string
      */
+    public function getSourceDirectory()
+    {
+        return 'src';
+    }
+
+    /**
+     * @return string
+     */
+    public function getTestsDirectory()
+    {
+        return 'tests';
+    }
+
+    /**
+     * @return string
+     */
     public function getPHPCSRules()
     {
         return 'PEAR';
