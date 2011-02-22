@@ -80,6 +80,6 @@ class PPW_Processor_PHPUnitTest extends PHPUnit_Framework_TestCase
         $phpunitProcessor->setSourcesFolder('MySource');
         $phpunitProcessor->setTestsFolder('MyTests');
         $phpunitProcessor->setBootstrapFile('MyBootstrap');
-        $phpunitProcessor->render();
+        $phpunitProcessor->render(TRUE);
     }
 }

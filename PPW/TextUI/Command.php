@@ -129,6 +129,14 @@ class PPW_TextUI_Command
 
         $input->registerOption(
           new ezcConsoleOption(
+            'f',
+            'force',
+            ezcConsoleInput::TYPE_NONE
+           )
+        );
+
+        $input->registerOption(
+          new ezcConsoleOption(
             'h',
             'help',
             ezcConsoleInput::TYPE_NONE,
@@ -190,6 +198,7 @@ class PPW_TextUI_Command
         $bootstrap = $input->getOption('bootstrap')->value;
         $phpcs     = $input->getOption('phpcs')->value;
         $phpmd     = $input->getOption('phpmd')->value;
+        $force     = $input->getOption('force')->value;
         $preset    = 'PPW_Preset_' . $input->getOption('preset')->value;
         $preset    = new $preset;
 
@@ -266,7 +275,15 @@ class PPW_TextUI_Command
         $processor->setApiDoc($preset->getApiDocumentationTarget());
         $processor->setPHPCSRules($phpcs);
         $processor->setPHPMDRules($phpmd);
-        $processor->render();
+
+        try {
+            $processor->render($force);
+        }
+
+        catch (RuntimeException $e) {
+            print "\n" . $e->getMessage() . "\n";
+            exit(1);
+        }
 
         print "\nWrote build script for Apache Ant to " . $_target;
 
@@ -279,7 +296,15 @@ class PPW_TextUI_Command
         $processor->setSourcesFolder($source);
         $processor->setTestsFolder($tests);
         $processor->setBootstrapFile($bootstrap);
-        $processor->render();
+
+        try {
+            $processor->render($force);
+        }
+
+        catch (RuntimeException $e) {
+            print "\n" . $e->getMessage() . "\n";
+            exit(1);
+        }
 
         print "\nWrote configuration for PHPUnit to " . $_target . "\n";
     }
@@ -309,6 +334,8 @@ Usage: ppw [switches] <directory>
     --bootstrap <script>  Bootstrap script for testsuite
     --phpcs <ruleset>     Ruleset for PHP_CodeSniffer
     --phpmd <ruleset,...> Ruleset(s) for PHPMD
+
+  --force                 Overwrite existing files
 
   --help                  Prints this usage information
   --version               Prints the version and exits

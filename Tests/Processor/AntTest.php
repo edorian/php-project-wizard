@@ -80,6 +80,6 @@ class PPW_Processor_AntTest extends PHPUnit_Framework_TestCase
         $antProcessor->setSourcesFolder('MySource');
         $antProcessor->setPHPCSRules('MyCsRules');
         $antProcessor->setPHPMDRules('MyPmdRules');
-        $antProcessor->render();
+        $antProcessor->render(TRUE);
     }
 }

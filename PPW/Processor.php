@@ -113,8 +113,9 @@ abstract class PPW_Processor
     }
 
     /**
+     * @param boolean $force
      */
-    public function render()
+    public function render($force)
     {
         $this->template->setVar(
           array(
@@ -122,6 +123,12 @@ abstract class PPW_Processor
             'project_name' => $this->projectName
           )
         );
+
+        if (file_exists($this->target) && !$force) {
+            throw new RuntimeException(
+              $this->target . ' already exists, aborting.'
+            );
+        }
 
         $this->template->renderTo($this->target);
     }

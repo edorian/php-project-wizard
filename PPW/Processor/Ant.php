@@ -93,8 +93,9 @@ class PPW_Processor_Ant extends PPW_Processor
     }
 
     /**
+     * @param boolean $force
      */
-    public function render()
+    public function render($force)
     {
         $this->template->setVar(
           array(
@@ -106,6 +107,6 @@ class PPW_Processor_Ant extends PPW_Processor
           )
         );
 
-        parent::render();
+        parent::render($force);
     }
 }
