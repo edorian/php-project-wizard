@@ -7,7 +7,11 @@
 
  <target name="clean">
   <!-- Clean up -->
-  <delete dir="${basedir}/build"/>
+  <delete dir="${basedir}/build/api"/>
+  <delete dir="${basedir}/build/code-browser"/>
+  <delete dir="${basedir}/build/coverage"/>
+  <delete dir="${basedir}/build/logs"/>
+  <delete dir="${basedir}/build/pdepend"/>
 
   <!-- Create build directories -->
   <mkdir dir="${basedir}/build/api"/>
