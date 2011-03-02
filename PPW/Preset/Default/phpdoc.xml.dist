@@ -1,5 +1,4 @@
- <!-- Use PHP_Documentor to generate API documentation -->
- <target name="phpdoc">
+ <target name="phpdoc" description="Generate API documentation using PHPDocumentor">
   <exec executable="phpdoc">
    <arg line="--directory ${source}
               --target    ${basedir}/build/api" />
